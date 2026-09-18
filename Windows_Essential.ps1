@@ -9,6 +9,12 @@ at the start of IRSec.#>
 $LocalUsers = Get-LocalUser
 echo "$LocalUsers"
 
+#Deletes all unwanted user accounts with user confirmation
 foreach ($User in $LocalUsers){
     echo $User
+    $Decision = Read-Host -Prompt "Delete this user? y/n: "
+    if ($Decision -eq "y"){
+        Remove-LocalUser -InputObject $User
+    }
 }
+
