@@ -3,18 +3,16 @@ and changes defualt passwords. It is meant to be run on all windows machines
 at the start of IRSec.#>
 
 #Removes global autoruns. User autoruns will persist after this step.
-#Remove-Item -Path "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\*"
+Remove-Item -Path "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\*"
 
 #Array of local user accounts
 $LocalUsers = Get-LocalUser
-echo "$LocalUsers"
 
 #Deletes all unwanted user accounts with user confirmation
 foreach ($User in $LocalUsers){
-    echo $User
+    Write-Host $User.Name
     $Decision = Read-Host -Prompt "Delete this user? y/n: "
     if ($Decision -eq "y"){
         Remove-LocalUser -InputObject $User
     }
 }
-
