@@ -13,6 +13,10 @@ foreach ($User in $LocalUsers){
     Write-Host $User.Name
     $Decision = Read-Host -Prompt "Delete this user? y/n: "
     if ($Decision -eq "y"){
+        Remove-Item -Path ("C:\users\" + $User.Name)
         Remove-LocalUser -InputObject $User
     }
 }
+
+#Reset the array because accounts got blown up.
+$LocalUsers = Get-LocalUser
