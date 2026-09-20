@@ -13,6 +13,7 @@ foreach ($User in $LocalUsers){
     Write-Host $User.Name
     $Decision = Read-Host -Prompt "Delete this user? y/n: "
     if ($Decision -eq "y"){
+        takeown /f ("C:\users\" + $User.Name) /r /d y
         Remove-Item -Path ("C:\users\" + $User.Name)
         Remove-LocalUser -InputObject $User
     }
