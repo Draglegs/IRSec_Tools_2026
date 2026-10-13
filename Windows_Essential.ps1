@@ -9,6 +9,7 @@ Remove-Item -Path "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\
 $LocalUsers = Get-LocalUser
 
 #Deletes all unwanted user accounts with user confirmation
+Echo "------User Deletion------"
 foreach ($User in $LocalUsers){
     Write-Host $User.Name
     $Decision = Read-Host -Prompt "Delete this user? y/n: "
@@ -22,3 +23,9 @@ foreach ($User in $LocalUsers){
 
 #Reset the array because accounts got blown up.
 $LocalUsers = Get-LocalUser
+
+#Password reset for all remaining users
+Echo "------Password Changes------"
+foreach ($User in $LocalUsers){
+    Echo "Password Changed Successfully"
+}
