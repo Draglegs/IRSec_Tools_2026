@@ -27,5 +27,6 @@ $LocalUsers = Get-LocalUser
 #Password reset for all remaining users
 Echo "------Password Changes------"
 foreach ($User in $LocalUsers){
-    Echo "Password Changed Successfully"
+    $Pass = Read-Host -Prompt "New Password for ($User.Name): " -AsSecureString
+    Set-LocalUser -Name $User.Name -Password $Pass
 }
